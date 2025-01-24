@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://dtp0r17saivp4"]
+
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_u5bic"]
+[ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_ytc2a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5je12"]
+albedo_texture = ExtResource("2_ytc2a")
+uv1_scale = Vector3(24, 24, 24)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00g4r"]
+
+[sub_resource type="Sky" id="Sky_an4fd"]
+sky_material = SubResource("ProceduralSkyMaterial_00g4r")
+
+[sub_resource type="Environment" id="Environment_cuhrp"]
+background_mode = 2
+sky = SubResource("Sky_an4fd")
+
+[node name="world" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_u5bic")]
+script = null
+
+[node name="floor" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(50, 0.1, 50)
+material = SubResource("StandardMaterial3D_5je12")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_cuhrp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.388095, 0.921619, 4.33415e-09, 0.305656, -0.128712, 0.943402, 0.869458, -0.366129, -0.331651, 0, 0, 0)

@@ -19,6 +19,7 @@ sky = SubResource("Sky_an4fd")
 [node name="world" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_u5bic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 
 [node name="floor" type="CSGBox3D" parent="."]
 use_collision = true
@@ -29,4 +30,5 @@ material = SubResource("StandardMaterial3D_5je12")
 environment = SubResource("Environment_cuhrp")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.388095, 0.921619, 4.33415e-09, 0.305656, -0.128712, 0.943402, 0.869458, -0.366129, -0.331651, 0, 0, 0)
+transform = Transform3D(0.479565, 0.0114709, 0.877428, -0.877509, 0.0062689, 0.479524, 0, -0.999915, 0.0130722, 0, 0, 0)
+shadow_enabled = true

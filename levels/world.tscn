@@ -5,7 +5,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5je12"]
 albedo_texture = ExtResource("2_ytc2a")
-uv1_scale = Vector3(24, 24, 24)
+uv1_scale = Vector3(100, 100, 100)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00g4r"]
 
@@ -19,11 +19,10 @@ sky = SubResource("Sky_an4fd")
 [node name="world" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_u5bic")]
-script = null
 
 [node name="floor" type="CSGBox3D" parent="."]
 use_collision = true
-size = Vector3(50, 0.1, 50)
+size = Vector3(200, 0.1, 200)
 material = SubResource("StandardMaterial3D_5je12")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

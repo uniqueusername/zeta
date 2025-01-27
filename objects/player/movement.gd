@@ -8,13 +8,14 @@ signal not_walking
 
 @export var max_speed: float = 15
 @export var start_rate: float = 0.5
-@export var stop_rate: float = 5 # aka friction
+@export var stop_rate: float = 1 # aka friction
 
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") * 4
 var slide_height: float = 0.7
 var slide_speed_threshold: float = 10
 var slide_height_rate: float = 1
 var slide_accel_multiplier: float = 0.5
+var slide_stop_rate_multiplier: float = 0.1
 var jump_velocity: float = 8
 
 var sliding: bool = false
@@ -40,11 +41,12 @@ func handle_movement(delta: float) -> void:
 	var curr_velocity: Vector2 = Vector2(p.velocity.x, p.velocity.z)
 	var velocity_target: Vector2 = input_dir * max_speed
 	var new_velocity: Vector2
+	var super_fast_multiplier: float = slide_stop_rate_multiplier if curr_velocity.length() > max_speed else 1
 	if velocity_target:
-		new_velocity = curr_velocity.move_toward(velocity_target, start_rate * 10)
+		new_velocity = curr_velocity.move_toward(velocity_target, start_rate * 10 * super_fast_multiplier)
 		walking.emit()
 	else:
-		new_velocity = curr_velocity.move_toward(Vector2.ZERO, stop_rate)
+		new_velocity = curr_velocity.move_toward(Vector2.ZERO, stop_rate * super_fast_multiplier)
 		not_walking.emit()
 	
 	p.velocity.x = new_velocity.x

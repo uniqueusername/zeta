@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfubhxrrlg12v"]
+[gd_scene load_steps=13 format=3 uid="uid://dfubhxrrlg12v"]
 
 [ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
 [ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_moee5"]
+font_size = 48
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icbxv"]
 
@@ -77,6 +80,19 @@ _data = {
 
 [node name="player" type="CharacterBody3D"]
 
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+offset_right = 127.0
+offset_bottom = 23.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+ratio = 1.78
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="speed" type="Label" parent="AspectRatioContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_moee5")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_icbxv")
@@ -91,11 +107,12 @@ libraries = {
 "": SubResource("AnimationLibrary_thadj")
 }
 
-[node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera")]
+[node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera", "speed_label")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_d8xfq")
 p = NodePath("..")
 camera = NodePath("../Camera3D")
+speed_label = NodePath("../AspectRatioContainer/speed")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
 root_node = NodePath("../..")

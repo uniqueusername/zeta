@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfubhxrrlg12v"]
+[gd_scene load_steps=9 format=3 uid="uid://dfubhxrrlg12v"]
 
 [ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
 [ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
@@ -35,45 +35,6 @@ tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 0.0333333, 1, 0, 1.49979, 0,
 _data = {
 "RESET": SubResource("Animation_jn7cq"),
 "bob": SubResource("Animation_5pjk0")
-}
-
-[sub_resource type="Animation" id="Animation_hhjdf"]
-length = 0.001
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1)
-
-[sub_resource type="Animation" id="Animation_3x5gv"]
-resource_name = "slide"
-length = 0.25
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.0333333, 1, 1, 0.818874, 1, 0.0666667, 1, 1, 0.746994, 1, 0.1, 1, 1, 0.718469, 1, 0.133333, 1, 1, 0.707148, 1, 0.166667, 1, 1, 0.702656, 1, 0.2, 1, 1, 0.700873, 1, 0.233333, 1, 1, 0.700166, 1, 0.25, 1, 1, 0.7, 1)
-
-[sub_resource type="Animation" id="Animation_qlru3"]
-resource_name = "unslide"
-length = 0.25
-tracks/0/type = "scale_3d"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 1, 0.7, 1, 0.0333333, 1, 1, 0.881126, 1, 0.0666667, 1, 1, 0.953006, 1, 0.1, 1, 1, 0.981531, 1, 0.133333, 1, 1, 0.992852, 1, 0.166667, 1, 1, 0.997344, 1, 0.2, 1, 1, 0.999127, 1, 0.233333, 1, 1, 0.999834, 1, 0.25, 1, 1, 1, 1)
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxuxk"]
-_data = {
-"RESET": SubResource("Animation_hhjdf"),
-"slide": SubResource("Animation_3x5gv"),
-"unslide": SubResource("Animation_qlru3")
 }
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8k27h"]
@@ -113,12 +74,6 @@ script = ExtResource("2_d8xfq")
 p = NodePath("..")
 camera = NodePath("../Camera3D")
 speed_label = NodePath("../AspectRatioContainer/speed")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="movement"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_rxuxk")
-}
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

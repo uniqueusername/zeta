@@ -75,6 +75,10 @@ p = NodePath("..")
 camera = NodePath("../Camera3D")
 speed_label = NodePath("../AspectRatioContainer/speed")
 
+[node name="dash_cooldown" type="Timer" parent="movement"]
+wait_time = 2.0
+one_shot = true
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_8k27h")

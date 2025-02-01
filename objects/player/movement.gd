@@ -24,9 +24,11 @@ const slide_turn_allowance: float = 0.8
 ## dashing
 const dash_vel: float = 25
 const slide_dash_multiplier: float = 0.35
+const dash_cooldown: float = 1
 
 ## other
 const jump_vel: float = 3
+const air_strafe_mult: float = 0.5
 
 # variables
 var sliding: bool = false
@@ -46,7 +48,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and p.is_on_floor():
 		_jump()
 		
-	if event.is_action_pressed("dash"):
+	if event.is_action_pressed("dash") and $dash_cooldown.is_stopped():
 		_dash(Input.get_axis("left", "right"))
 		
 	if event.is_action_pressed("slide"):
@@ -58,12 +60,14 @@ func _apply_gravity(delta: float) -> void:
 	p.velocity.y -= gravity * delta
 
 func _handle_walking(movement_dir: Vector2, delta: float) -> void:
+	var multiplier: float = 1 if p.is_on_floor() else air_strafe_mult
+	
 	if movement_dir:
 		walking.emit()
-		_set_player_vel_from_2d(_get_2d_player_vel().move_toward(movement_dir * max_walk_vel, walk_accel * delta))
+		_set_player_vel_from_2d(_get_2d_player_vel().move_toward(movement_dir * max_walk_vel, walk_accel * multiplier * delta))
 	else:
 		not_walking.emit()
-		_set_player_vel_from_2d(_get_2d_player_vel().move_toward(Vector2.ZERO, walk_accel * delta))
+		_set_player_vel_from_2d(_get_2d_player_vel().move_toward(Vector2.ZERO, walk_accel * multiplier * delta))
 
 func _handle_sliding(movement_dir: Vector2, delta: float) -> void:
 	var curr_vel: Vector2 = _get_2d_player_vel()
@@ -84,6 +88,7 @@ func _dash(dash_dir: float):
 	var input: Vector2 = Vector2(dash_dir, 0)
 	var multiplier: float = 1 if not sliding else slide_dash_multiplier
 	var new_vel: Vector2 = _get_2d_player_vel() + _calculate_movement_dir(input) * dash_vel * multiplier
+	$dash_cooldown.start(dash_cooldown)
 	
 	_set_player_vel_from_2d(new_vel)
 	camera.dash(dash_dir)

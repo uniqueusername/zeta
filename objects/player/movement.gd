@@ -29,6 +29,7 @@ const dash_cooldown: float = 1
 ## other
 const jump_vel: float = 3
 const air_strafe_mult: float = 0.5
+const redirect_multiplier: float = 1
 
 # variables
 var sliding: bool = false
@@ -40,6 +41,7 @@ func _physics_process(delta) -> void:
 	if not p.is_on_floor(): _apply_gravity(delta)
 	if not sliding: _handle_walking(movement_dir, delta)
 	else: _handle_sliding(movement_dir, delta)
+	#if Input.is_action_just_pressed("parry"): _instant_redirect(camera.global_transform.basis.z)
 	p.move_and_slide()
 	
 	_update_speed_label()
@@ -103,7 +105,7 @@ func _set_slide(sliding: bool):
 		_tween_player_height(0.8)
 
 func _update_speed_label():
-	if speed_label: speed_label.text = str(int(_get_2d_player_vel().length()))
+	if speed_label: speed_label.text = str(int(p.velocity.length()))
 
 func _get_2d_player_vel() -> Vector2:
 	return Vector2(p.velocity.x, -p.velocity.z)
@@ -119,3 +121,6 @@ func _tween_player_height(height: float) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(p, "scale:y", height, 0.3)
+
+func _instant_redirect(redirect_dir: Vector3) -> void:
+	p.velocity = redirect_dir.normalized() * p.velocity.length() * redirect_multiplier

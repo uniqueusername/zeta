@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfubhxrrlg12v"]
+
+[ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
+[ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_moee5"]
+font_size = 48
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icbxv"]
+
+[sub_resource type="Animation" id="Animation_jn7cq"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1, 0)
+
+[sub_resource type="Animation" id="Animation_5pjk0"]
+resource_name = "bob"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 0.0333333, 1, 0, 1.49979, 0, 0.0666667, 1, 0, 1.49912, 0, 0.1, 1, 0, 1.49697, 0, 0.133333, 1, 0, 1.49018, 0, 0.166667, 1, 0, 1.4686, 0, 0.2, 1, 0, 1.4, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_thadj"]
+_data = {
+"RESET": SubResource("Animation_jn7cq"),
+"bob": SubResource("Animation_5pjk0")
+}
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8k27h"]
+
+[node name="player" type="CharacterBody3D"]
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+offset_right = 127.0
+offset_bottom = 23.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+ratio = 1.78
+alignment_horizontal = 0
+alignment_vertical = 0
+
+[node name="speed" type="Label" parent="AspectRatioContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_moee5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_icbxv")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+current = true
+script = ExtResource("2_5mtcw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_thadj")
+}
+
+[node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera", "speed_label")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_d8xfq")
+p = NodePath("..")
+camera = NodePath("../Camera3D")
+speed_label = NodePath("../AspectRatioContainer/speed")
+
+[node name="dash_cooldown" type="Timer" parent="movement"]
+wait_time = 2.0
+one_shot = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_8k27h")
+
+[connection signal="not_walking" from="movement" to="Camera3D" method="_on_movement_not_walking"]
+[connection signal="walking" from="movement" to="Camera3D" method="_on_movement_walking"]

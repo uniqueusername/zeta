@@ -19,13 +19,6 @@ func _on_movement_walking() -> void:
 
 func _on_movement_not_walking() -> void:
 	$AnimationPlayer.stop()
-	
-func _rotate_to_base() -> void:
-	var new_rot: Vector3 = rotation
-	new_rot.z = 0
-	
-	var tween: Tween = self.create_tween()
-
 
 func dash(dash_dir: float) -> void:
 	var tween: Tween = self.create_tween()

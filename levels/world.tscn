@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtp0r17saivp4"]
+[gd_scene load_steps=7 format=3 uid="uid://nhge1y5x4ekf"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_u5bic"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_ytc2a"]
@@ -19,7 +19,7 @@ sky = SubResource("Sky_an4fd")
 [node name="world" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_u5bic")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="floor" type="CSGBox3D" parent="."]
 use_collision = true

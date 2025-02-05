@@ -8,9 +8,10 @@ signal not_walking
 @export var p: CharacterBody3D
 @export var camera: Camera3D
 @export var speed_label: Label
+@export var hook_ray: RayCast3D
 
 # constants
-var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") * 4
 
 ## walking
 const walk_accel: float = 150
@@ -26,13 +27,18 @@ const dash_vel: float = 25
 const slide_dash_multiplier: float = 0.35
 const dash_cooldown: float = 1
 
+## hook
+const hook_vel: float = 65
+const hook_vert_multiplier: float = 1.3
+
 ## other
-const jump_vel: float = 3
+const jump_vel: float = 6
 const air_strafe_mult: float = 0.5
 const redirect_multiplier: float = 1
 
 # variables
 var sliding: bool = false
+var hooked: bool = false
 
 func _physics_process(delta) -> void:
 	var input_dir: Vector2 = Input.get_vector("left", "right", "backward", "forward")
@@ -41,7 +47,8 @@ func _physics_process(delta) -> void:
 	if not p.is_on_floor(): _apply_gravity(delta)
 	if not sliding: _handle_walking(movement_dir, delta)
 	else: _handle_sliding(movement_dir, delta)
-	#if Input.is_action_just_pressed("parry"): _instant_redirect(camera.global_transform.basis.z)
+	if hooked: _handle_hook(delta)
+	if Input.is_action_just_pressed("parry"): _instant_redirect(camera.global_transform.basis.z)
 	p.move_and_slide()
 	
 	_update_speed_label()
@@ -57,6 +64,11 @@ func _input(event: InputEvent) -> void:
 		_set_slide(true)
 	if event.is_action_released("slide"):
 		_set_slide(false)
+		
+	if event.is_action_pressed("fire_hook"):
+		_fire_hook()
+	if event.is_action_released("fire_hook"):
+		_release_hook()
 
 func _apply_gravity(delta: float) -> void:
 	p.velocity.y -= gravity * delta
@@ -82,6 +94,11 @@ func _handle_sliding(movement_dir: Vector2, delta: float) -> void:
 		
 	if _get_2d_player_vel().length() <= max_walk_vel:
 		_set_slide(false)
+		
+func _handle_hook(delta: float) -> void:
+	var hook_vec: Vector3 = ($hook.global_position - p.global_position).normalized() * hook_vel * delta
+	hook_vec.y *= hook_vert_multiplier
+	p.velocity += hook_vec
 
 func _jump():
 	p.velocity.y += jump_vel
@@ -124,3 +141,10 @@ func _tween_player_height(height: float) -> void:
 
 func _instant_redirect(redirect_dir: Vector3) -> void:
 	p.velocity = redirect_dir.normalized() * p.velocity.length() * redirect_multiplier
+
+func _fire_hook() -> void:
+	hooked = true
+	$hook.global_position = hook_ray.get_collision_point()
+
+func _release_hook() -> void:
+	hooked = false

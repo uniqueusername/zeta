@@ -41,6 +41,17 @@ _data = {
 
 [node name="player" type="CharacterBody3D"]
 
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 offset_right = 127.0
 offset_bottom = 23.0
@@ -68,16 +79,26 @@ libraries = {
 "": SubResource("AnimationLibrary_thadj")
 }
 
-[node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera", "speed_label")]
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+target_position = Vector3(0, 0, -1000)
+
+[node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera", "speed_label", "hook_ray")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 script = ExtResource("2_d8xfq")
 p = NodePath("..")
 camera = NodePath("../Camera3D")
 speed_label = NodePath("../AspectRatioContainer/speed")
+hook_ray = NodePath("../Camera3D/RayCast3D")
 
 [node name="dash_cooldown" type="Timer" parent="movement"]
 wait_time = 2.0
 one_shot = true
+
+[node name="hook" type="Node3D" parent="movement"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+top_level = true
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="movement/hook"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

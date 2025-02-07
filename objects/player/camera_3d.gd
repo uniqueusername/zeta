@@ -14,6 +14,9 @@ func _input(event: InputEvent) -> void:
 		rotation.x += event.get_screen_relative().y * -1 * SENSITIVITY;
 		rotation.y += event.get_screen_relative().x * -1 * SENSITIVITY;
 
+func _process(delta: float) -> void:
+	rotation.x = clampf(rotation.x, -PI/2, PI/2)
+
 func _on_movement_walking() -> void:
 	$AnimationPlayer.play()
 

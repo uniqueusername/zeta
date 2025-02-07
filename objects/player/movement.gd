@@ -47,7 +47,7 @@ func _physics_process(delta) -> void:
 	var input_dir: Vector2 = Input.get_vector("left", "right", "backward", "forward")
 	var movement_dir: Vector2 = _calculate_movement_dir(input_dir)
 	
-	if not p.is_on_floor(): _apply_gravity(delta)
+	_apply_gravity(delta)
 	if not sliding: _handle_walking(movement_dir, delta)
 	else: _handle_sliding(movement_dir, delta)
 	if hooked: _handle_hook(delta)

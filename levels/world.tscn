@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://nhge1y5x4ekf"]
+[gd_scene load_steps=9 format=3 uid="uid://nhge1y5x4ekf"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_u5bic"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_ytc2a"]
@@ -18,6 +18,10 @@ sky_material = SubResource("ProceduralSkyMaterial_00g4r")
 [sub_resource type="Environment" id="Environment_cuhrp"]
 background_mode = 2
 sky = SubResource("Sky_an4fd")
+
+[sub_resource type="PrismMesh" id="PrismMesh_oej0m"]
+left_to_right = -0.7
+size = Vector3(25, 50, 100)
 
 [node name="world" type="Node3D"]
 
@@ -41,3 +45,8 @@ environment = SubResource("Environment_cuhrp")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.479565, 0.0114709, 0.877428, -0.877509, 0.0062689, 0.479524, 0, -0.999915, 0.0130722, 0, 0, 0)
 shadow_enabled = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(0.997876, 0.0651419, 0, -0.0651419, 0.997876, 0, 0, 0, 1, -39.0291, 9.00541, 0)
+use_collision = true
+mesh = SubResource("PrismMesh_oej0m")

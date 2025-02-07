@@ -23,13 +23,14 @@ const slide_friction: float = 50
 const slide_turn_allowance: float = 0.8
 
 ## dashing
-const dash_vel: float = 25
+const dash_vel: float = 35
 const slide_dash_multiplier: float = 0.35
 const dash_cooldown: float = 1
 
 ## hook
 const hook_vel: float = 65
 const hook_vert_multiplier: float = 1.3
+const hookable_color: Color = Color(0.25, 0.25, 1)
 
 ## other
 const jump_vel: float = 6
@@ -54,6 +55,14 @@ func _physics_process(delta) -> void:
 	p.move_and_slide()
 	
 	_update_speed_label()
+	
+func _process(delta) -> void:
+	if hook_ray.is_colliding():
+		$hook/CenterContainer/TextureRect.color = hookable_color
+	else:
+		$hook/CenterContainer/TextureRect.color = Color.WHITE
+	
+	if (hooked): _handle_hook_graphics(delta)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and p.is_on_floor():
@@ -79,7 +88,10 @@ func _handle_walking(movement_dir: Vector2, delta: float) -> void:
 	var multiplier: float = 1 if p.is_on_floor() else air_strafe_mult
 	
 	if movement_dir:
-		walking.emit()
+		if p.is_on_floor():
+			walking.emit()
+		else:
+			not_walking.emit()
 		_set_player_vel_from_2d(_get_2d_player_vel().move_toward(movement_dir * max_walk_vel, walk_accel * multiplier * delta))
 	else:
 		not_walking.emit()
@@ -98,9 +110,18 @@ func _handle_sliding(movement_dir: Vector2, delta: float) -> void:
 		_set_slide(false)
 		
 func _handle_hook(delta: float) -> void:
-	var hook_vec: Vector3 = ($hook.global_position - p.global_position).normalized() * hook_vel * delta
+	var hook_vec: Vector3 = ($hook.global_position - camera.global_position).normalized() * hook_vel * delta
 	hook_vec.y *= hook_vert_multiplier
 	p.velocity += hook_vec
+	
+func _handle_hook_graphics(delta: float) -> void:
+	$hook/chain.global_position = $hook.global_position
+	$hook/chain.transform = $hook/chain.global_transform.looking_at(camera.global_position, Vector3.UP, true)
+	$hook/chain.rotation.x += PI/2
+	var dist: float = ($hook/chain.global_position - camera.global_position).length()
+	$hook/chain.height = dist
+	$hook/chain.global_position = $hook/chain.global_position.move_toward(p.global_position, dist/2)
+	$hook/chain.material.uv1_scale.y = dist * 4
 
 func _jump():
 	p.velocity.y += jump_vel
@@ -153,8 +174,11 @@ func _instant_redirect(redirect_dir: Vector3) -> void:
 	p.velocity = redirect_dir.normalized() * p.velocity.length() * redirect_multiplier
 
 func _fire_hook() -> void:
-	hooked = true
-	$hook.global_position = hook_ray.get_collision_point()
+	if (hook_ray.is_colliding()):
+		hooked = true
+		$hook.global_position = hook_ray.get_collision_point()
+		$hook/chain.visible = true
 
 func _release_hook() -> void:
 	hooked = false
+	$hook/chain.visible = false

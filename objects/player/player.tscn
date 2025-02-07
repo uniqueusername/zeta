@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dfubhxrrlg12v"]
+[gd_scene load_steps=11 format=3 uid="uid://dfubhxrrlg12v"]
 
 [ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
 [ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
+[ext_resource type="Texture2D" uid="uid://cer16c8eyx2l1" path="res://objects/player/chain.png" id="3_htvnb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_moee5"]
 font_size = 48
@@ -37,20 +38,16 @@ _data = {
 "bob": SubResource("Animation_5pjk0")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ejws"]
+transparency = 1
+albedo_texture = ExtResource("3_htvnb")
+uv1_scale = Vector3(1, 2, 1)
+texture_filter = 0
+grow_amount = 1.425
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8k27h"]
 
 [node name="player" type="CharacterBody3D"]
-
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="ColorRect" parent="CenterContainer"]
-custom_minimum_size = Vector2(5, 5)
-layout_mode = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 offset_right = 127.0
@@ -80,7 +77,7 @@ libraries = {
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
-target_position = Vector3(0, 0, -1000)
+target_position = Vector3(0, 0, -100)
 
 [node name="movement" type="Node3D" parent="." node_paths=PackedStringArray("p", "camera", "speed_label", "hook_ray")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -98,7 +95,23 @@ one_shot = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 top_level = true
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="movement/hook"]
+[node name="CenterContainer" type="CenterContainer" parent="movement/hook"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="ColorRect" parent="movement/hook/CenterContainer"]
+custom_minimum_size = Vector2(5, 5)
+layout_mode = 2
+
+[node name="chain" type="CSGCylinder3D" parent="movement/hook"]
+top_level = true
+radius = 0.05
+sides = 6
+smooth_faces = false
+material = SubResource("StandardMaterial3D_5ejws")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

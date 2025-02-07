@@ -18,7 +18,7 @@ const walk_accel: float = 150
 const max_walk_vel: float = 15
 
 ## sliding
-const slide_accel: float = 25
+const slide_accel: float = 15
 const slide_friction: float = 50
 const slide_turn_allowance: float = 0.8
 
@@ -35,6 +35,8 @@ const hook_vert_multiplier: float = 1.3
 const jump_vel: float = 6
 const air_strafe_mult: float = 0.5
 const redirect_multiplier: float = 1
+const default_fov: float = 75
+const slide_fov: float = 100
 
 # variables
 var sliding: bool = false
@@ -116,10 +118,12 @@ func _set_slide(sliding: bool):
 	if not sliding and _get_2d_player_vel().length() <= max_walk_vel:
 		self.sliding = false
 		_tween_player_height(1)
-	else:
+		_tween_camera_fov(default_fov)
+	elif p.is_on_floor():
 		self.sliding = true
 		not_walking.emit()
 		_tween_player_height(0.8)
+		_tween_camera_fov(slide_fov)
 
 func _update_speed_label():
 	if speed_label: speed_label.text = str(int(p.velocity.length()))
@@ -138,7 +142,13 @@ func _tween_player_height(height: float) -> void:
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(p, "scale:y", height, 0.3)
-
+	
+func _tween_camera_fov(fov: float) -> void:
+	var tween: Tween = self.create_tween()
+	tween.set_ease(Tween.EASE_OUT)
+	tween.set_trans(Tween.TRANS_QUART)
+	tween.tween_property(camera, "fov", fov, 0.3)
+	
 func _instant_redirect(redirect_dir: Vector3) -> void:
 	p.velocity = redirect_dir.normalized() * p.velocity.length() * redirect_multiplier
 

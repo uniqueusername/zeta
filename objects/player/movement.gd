@@ -33,7 +33,7 @@ const hook_vert_multiplier: float = 1.3
 const hookable_color: Color = Color(0.25, 0.25, 1)
 
 ## other
-const jump_vel: float = 6
+const jump_vel: float = 15
 const air_strafe_mult: float = 0.3
 const redirect_multiplier: float = 1
 const default_fov: float = 75

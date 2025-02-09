@@ -48,9 +48,8 @@ grow_amount = 1.425
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8k27h"]
 
 [node name="player" type="CharacterBody3D"]
-wall_min_slide_angle = 0.0
+wall_min_slide_angle = 3.14159
 floor_stop_on_slope = false
-floor_block_on_wall = false
 floor_snap_length = 1.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://nhge1y5x4ekf"]
+[gd_scene load_steps=10 format=3 uid="uid://nhge1y5x4ekf"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_u5bic"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_ytc2a"]
+[ext_resource type="PackedScene" uid="uid://br32njnyy8rxs" path="res://levels/terrain-col.glb" id="3_ie06j"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5je12"]
 albedo_texture = ExtResource("2_ytc2a")
@@ -29,7 +30,7 @@ size = Vector3(25, 50, 100)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
 
 [node name="floor" type="CSGBox3D" parent="."]
-use_collision = true
+visible = false
 size = Vector3(200, 0.1, 200)
 material = SubResource("StandardMaterial3D_5je12")
 
@@ -50,3 +51,6 @@ shadow_enabled = true
 transform = Transform3D(0.997876, 0.0651419, 0, -0.0651419, 0.997876, 0, 0, 0, 1, -39.0291, 9.00541, 0)
 use_collision = true
 mesh = SubResource("PrismMesh_oej0m")
+
+[node name="terrain-col" parent="." instance=ExtResource("3_ie06j")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -17.5874, 0)

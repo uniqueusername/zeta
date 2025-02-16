@@ -1,6 +1,7 @@
 extends Camera3D
 
-const SENSITIVITY: float = 0.001;
+const SENSITIVITY: float = 0.001
+const CONTROLLER_SENSITIVITY: float = 0.15
 const AUTO_ROTATE_RATE: float = 0.01
 const DASH_ROTATION: float = 0.02
 
@@ -14,7 +15,11 @@ func _input(event: InputEvent) -> void:
 		rotation.x += event.get_screen_relative().y * -1 * SENSITIVITY;
 		rotation.y += event.get_screen_relative().x * -1 * SENSITIVITY;
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	var input_dir: Vector2 = Input.get_vector("cam_down", "cam_up", "cam_right", "cam_left", 0)
+	rotation.x += input_dir.x ** 3 * CONTROLLER_SENSITIVITY
+	rotation.y += input_dir.y ** 3 * CONTROLLER_SENSITIVITY
+	
 	rotation.x = clampf(rotation.x, -PI/2, PI/2)
 
 func _on_movement_walking() -> void:

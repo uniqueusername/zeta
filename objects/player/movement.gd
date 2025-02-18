@@ -116,7 +116,9 @@ func _handle_hook(delta: float) -> void:
 	
 func _handle_hook_graphics(delta: float) -> void:
 	$hook/chain.global_position = $hook.global_position
-	$hook/chain.transform = $hook/chain.global_transform.looking_at(camera.global_position, Vector3.UP, true)
+	
+	if (camera.global_position.cross(Vector3.UP) != Vector3.ZERO):
+		$hook/chain.transform = $hook/chain.global_transform.looking_at(camera.global_position, Vector3.UP, true)
 	$hook/chain.rotation.x += PI/2
 	var dist: float = ($hook/chain.global_position - camera.global_position).length()
 	$hook/chain.height = dist

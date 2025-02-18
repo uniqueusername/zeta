@@ -1,56 +1,66 @@
 [gd_scene load_steps=10 format=3 uid="uid://nhge1y5x4ekf"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_u5bic"]
-[ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_ytc2a"]
-[ext_resource type="PackedScene" uid="uid://br32njnyy8rxs" path="res://levels/terrain-col.glb" id="3_ie06j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5je12"]
-albedo_texture = ExtResource("2_ytc2a")
-uv1_scale = Vector3(100, 100, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1p3q"]
+diffuse_mode = 3
+specular_mode = 1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gmmv2"]
-albedo_texture = ExtResource("2_ytc2a")
+[sub_resource type="BoxShape3D" id="BoxShape3D_oq8em"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_00g4r"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lkr7m"]
+diffuse_mode = 3
+specular_mode = 1
 
-[sub_resource type="Sky" id="Sky_an4fd"]
-sky_material = SubResource("ProceduralSkyMaterial_00g4r")
+[sub_resource type="BoxMesh" id="BoxMesh_l4hpl"]
+material = SubResource("StandardMaterial3D_lkr7m")
 
-[sub_resource type="Environment" id="Environment_cuhrp"]
-background_mode = 2
-sky = SubResource("Sky_an4fd")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0166q"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.198027, 0.000399196, 0.485508, 1)
 
-[sub_resource type="PrismMesh" id="PrismMesh_oej0m"]
-left_to_right = -0.7
-size = Vector3(25, 50, 100)
+[sub_resource type="BoxMesh" id="BoxMesh_qhe18"]
+material = SubResource("StandardMaterial3D_0166q")
+size = Vector3(30, 1, 30)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ttadc"]
+data = PackedVector3Array(-15, 0.5, 15, 15, 0.5, 15, -15, -0.5, 15, 15, 0.5, 15, 15, -0.5, 15, -15, -0.5, 15, 15, 0.5, -15, -15, 0.5, -15, 15, -0.5, -15, -15, 0.5, -15, -15, -0.5, -15, 15, -0.5, -15, 15, 0.5, 15, 15, 0.5, -15, 15, -0.5, 15, 15, 0.5, -15, 15, -0.5, -15, 15, -0.5, 15, -15, 0.5, -15, -15, 0.5, 15, -15, -0.5, -15, -15, 0.5, 15, -15, -0.5, 15, -15, -0.5, -15, 15, 0.5, 15, -15, 0.5, 15, 15, 0.5, -15, -15, 0.5, 15, -15, 0.5, -15, 15, 0.5, -15, -15, -0.5, 15, 15, -0.5, 15, -15, -0.5, -15, 15, -0.5, 15, 15, -0.5, -15, -15, -0.5, -15)
+
+[sub_resource type="Environment" id="Environment_xiesb"]
+background_mode = 1
 
 [node name="world" type="Node3D"]
 
+[node name="tethered" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07911, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="tethered"]
+transform = Transform3D(0.993694, 0.111587, -0.0109983, -0.112128, 0.988902, -0.0974681, 0, 0.0980866, 0.995178, 1.13792, 9.81917, 0.954386)
+radius = 0.1
+height = 20.0
+material = SubResource("StandardMaterial3D_j1p3q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="tethered"]
+shape = SubResource("BoxShape3D_oq8em")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="tethered"]
+mesh = SubResource("BoxMesh_l4hpl")
+
 [node name="player" parent="." instance=ExtResource("1_u5bic")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
-
-[node name="floor" type="CSGBox3D" parent="."]
-visible = false
-size = Vector3(200, 0.1, 200)
-material = SubResource("StandardMaterial3D_5je12")
-
-[node name="box" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 36.8239, 0)
-material_override = SubResource("StandardMaterial3D_gmmv2")
-use_collision = true
-size = Vector3(25, 25, 25)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_cuhrp")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.479565, 0.0114709, 0.877428, -0.877509, 0.0062689, 0.479524, 0, -0.999915, 0.0130722, 0, 0, 0)
-shadow_enabled = true
+transform = Transform3D(-0.174301, 0.522143, 0.834857, 0, -0.847835, 0.53026, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(0.997876, 0.0651419, 0, -0.0651419, 0.997876, 0, 0, 0, 1, -39.0291, 9.00541, 0)
-use_collision = true
-mesh = SubResource("PrismMesh_oej0m")
+[node name="floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("BoxMesh_qhe18")
 
-[node name="terrain-col" parent="." instance=ExtResource("3_ie06j")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -17.5874, 0)
+[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ttadc")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xiesb")

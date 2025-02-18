@@ -51,7 +51,7 @@ func _physics_process(delta) -> void:
 	if not sliding: _handle_walking(movement_dir, delta)
 	else: _handle_sliding(movement_dir, delta)
 	if hooked: _handle_hook(delta)
-	if Input.is_action_just_pressed("parry"): _instant_redirect(camera.global_transform.basis.z)
+	if Input.is_action_just_pressed("parry"): instant_redirect()
 	p.move_and_slide()
 	
 	_update_speed_label()
@@ -172,8 +172,8 @@ func _tween_camera_fov(fov: float) -> void:
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(camera, "fov", fov, 0.3)
 	
-func _instant_redirect(redirect_dir: Vector3) -> void:
-	p.velocity = redirect_dir.normalized() * p.velocity.length() * redirect_multiplier
+func instant_redirect() -> void:
+	p.velocity = camera.global_transform.basis.z.normalized() * p.velocity.length() * redirect_multiplier
 
 func _fire_hook() -> void:
 	if (hook_ray.is_colliding()):

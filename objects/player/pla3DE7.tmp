@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfubhxrrlg12v"]
+[gd_scene load_steps=16 format=3 uid="uid://dfubhxrrlg12v"]
 
-[ext_resource type="Script" path="res://objects/player/player.gd" id="1_1w6xj"]
 [ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
 [ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
 [ext_resource type="Shader" path="res://outline.gdshader" id="2_h6ki6"]
@@ -13,7 +12,7 @@ font_size = 48
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icbxv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3r8v2"]
-size = Vector3(4, 1.5, 4.5)
+size = Vector3(3, 1.5, 3)
 
 [sub_resource type="Animation" id="Animation_jn7cq"]
 length = 0.001
@@ -79,29 +78,18 @@ collision_layer = 4
 wall_min_slide_angle = 3.14159
 floor_stop_on_slope = false
 floor_snap_length = 1.0
-script = ExtResource("1_1w6xj")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
+offset_right = 127.0
+offset_bottom = 23.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 ratio = 1.78
 alignment_horizontal = 0
 alignment_vertical = 0
 
 [node name="speed" type="Label" parent="AspectRatioContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-label_settings = SubResource("LabelSettings_moee5")
-
-[node name="health" type="Label" parent="AspectRatioContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
 label_settings = SubResource("LabelSettings_moee5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -113,15 +101,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 current = true
 script = ExtResource("2_5mtcw")
 
-[node name="weapon" type="Area3D" parent="Camera3D" node_paths=PackedStringArray("movement")]
+[node name="weapon" type="Area3D" parent="Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("5_1ov7e")
-movement = NodePath("../../movement")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/weapon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0750029)
 shape = SubResource("BoxShape3D_3r8v2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
@@ -174,9 +160,6 @@ material = SubResource("StandardMaterial3D_5ejws")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_8k27h")
-
-[node name="iframe" type="Timer" parent="."]
-one_shot = true
 
 [connection signal="not_walking" from="movement" to="Camera3D" method="_on_movement_not_walking"]
 [connection signal="walking" from="movement" to="Camera3D" method="_on_movement_walking"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://edxsxtfgwtu0"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_v6iup"]
+
+[sub_resource type="Environment" id="Environment_iga4p"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.16
+
+[node name="level1" type="Node3D"]
+
+[node name="MarginContainer" parent="." instance=ExtResource("1_v6iup")]
+text = "goopy woopy"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iga4p")

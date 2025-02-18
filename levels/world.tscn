@@ -10,10 +10,10 @@ albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qhe18"]
 material = SubResource("StandardMaterial3D_0166q")
-size = Vector3(30, 1, 30)
+size = Vector3(60, 1, 60)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ttadc"]
-data = PackedVector3Array(-15, 0.5, 15, 15, 0.5, 15, -15, -0.5, 15, 15, 0.5, 15, 15, -0.5, 15, -15, -0.5, 15, 15, 0.5, -15, -15, 0.5, -15, 15, -0.5, -15, -15, 0.5, -15, -15, -0.5, -15, 15, -0.5, -15, 15, 0.5, 15, 15, 0.5, -15, 15, -0.5, 15, 15, 0.5, -15, 15, -0.5, -15, 15, -0.5, 15, -15, 0.5, -15, -15, 0.5, 15, -15, -0.5, -15, -15, 0.5, 15, -15, -0.5, 15, -15, -0.5, -15, 15, 0.5, 15, -15, 0.5, 15, 15, 0.5, -15, -15, 0.5, 15, -15, 0.5, -15, 15, 0.5, -15, -15, -0.5, 15, 15, -0.5, 15, -15, -0.5, -15, 15, -0.5, 15, 15, -0.5, -15, -15, -0.5, -15)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jgbu8"]
+data = PackedVector3Array(-30, 0.5, 30, 30, 0.5, 30, -30, -0.5, 30, 30, 0.5, 30, 30, -0.5, 30, -30, -0.5, 30, 30, 0.5, -30, -30, 0.5, -30, 30, -0.5, -30, -30, 0.5, -30, -30, -0.5, -30, 30, -0.5, -30, 30, 0.5, 30, 30, 0.5, -30, 30, -0.5, 30, 30, 0.5, -30, 30, -0.5, -30, 30, -0.5, 30, -30, 0.5, -30, -30, 0.5, 30, -30, -0.5, -30, -30, 0.5, 30, -30, -0.5, 30, -30, -0.5, -30, 30, 0.5, 30, -30, 0.5, 30, 30, 0.5, -30, -30, 0.5, 30, -30, 0.5, -30, 30, 0.5, -30, -30, -0.5, 30, 30, -0.5, 30, -30, -0.5, -30, 30, -0.5, 30, 30, -0.5, -30, -30, -0.5, -30)
 
 [sub_resource type="Environment" id="Environment_xiesb"]
 background_mode = 1
@@ -26,6 +26,21 @@ ambient_light_energy = 0.16
 [node name="tethered" parent="." instance=ExtResource("1_5ulqx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.07303, 0.5, 6.24321)
 
+[node name="tethered2" parent="." instance=ExtResource("1_5ulqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2898, 0.5, 13.9207)
+
+[node name="tethered3" parent="." instance=ExtResource("1_5ulqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8412, 0.5, -19.1514)
+
+[node name="tethered4" parent="." instance=ExtResource("1_5ulqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1446, 0.5, -7.57619)
+
+[node name="tethered5" parent="." instance=ExtResource("1_5ulqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2309, 0.5, -21.8681)
+
+[node name="tethered6" parent="." instance=ExtResource("1_5ulqx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9316, 0.5, 17.9366)
+
 [node name="player" parent="." instance=ExtResource("1_u5bic")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -34,13 +49,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+transform = Transform3D(0.999999, 4.65374e-11, 0.00106465, -4.65374e-11, 1, -2.6054e-14, -0.00106465, -2.6054e-14, 0.999999, 0, -1, 0)
 mesh = SubResource("BoxMesh_qhe18")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="floor"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_ttadc")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_jgbu8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_xiesb")

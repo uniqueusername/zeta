@@ -3,13 +3,18 @@ extends CharacterBody3D
 enum MoveState {ROAM, ROAM_HOSTILE, WAIT, ATTACK, SLIDE}
 
 var tethered: bool = true
-var hostile_color: Color = Color.RED
+var hostile_color: Color = Color.DARK_RED
 var move_state: MoveState = MoveState.ROAM
 var target: Vector3
 var move_speed: float = 5
 var track_rate: float = 0.3
 var attack_range: float = 5
-var attack_speed: float = 50
+var attack_speed: float = 35
+var damage: int = 100
+
+func _ready():
+	$MeshInstance3D.set_mesh($MeshInstance3D.get_mesh().duplicate(true))
+	$MeshInstance3D.mesh.material.albedo_color = Color.BLACK
 
 func _physics_process(delta: float) -> void:
 	if move_state == MoveState.ROAM: _roam()
@@ -23,12 +28,15 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	
+	if not tethered and $hitbox.has_overlapping_bodies():
+		%player.hit(damage)
+	
 func _process(delta: float) -> void:
 	if $Timer.is_stopped():
 		if tethered:
 			if move_state == MoveState.ROAM: 
 				move_state = MoveState.WAIT
-				$Timer.start(3 )
+				$Timer.start(randf_range(1, 3))
 			elif move_state == MoveState.WAIT: 
 				_pick_target()
 				move_state = MoveState.ROAM
@@ -51,7 +59,6 @@ func untether() -> void:
 
 # called when the enemy is attacked
 func hit() -> void:
-	if tethered: return
 	queue_free()
 
 func _pick_target() -> void:
@@ -63,7 +70,7 @@ func _roam() -> void:
 	velocity = target.normalized() * move_speed
 	
 func _roam_hostile() -> void:
-	target = target.move_toward(%player.global_position - global_position, track_rate).normalized() * move_speed
+	target = target.move_toward(%player.global_position - global_position, track_rate).normalized() * move_speed * 2
 	velocity = Vector3(target.x, velocity.y, target.z)
 	
 func _attack() -> void:

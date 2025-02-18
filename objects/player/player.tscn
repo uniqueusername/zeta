@@ -11,6 +11,9 @@ font_size = 48
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_icbxv"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3r8v2"]
+size = Vector3(3, 1.5, 3)
+
 [sub_resource type="Animation" id="Animation_jn7cq"]
 length = 0.001
 tracks/0/type = "position_3d"
@@ -70,10 +73,8 @@ grow_amount = 1.425
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_8k27h"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3r8v2"]
-size = Vector3(1.5, 1, 1)
-
 [node name="player" type="CharacterBody3D"]
+collision_layer = 4
 wall_min_slide_angle = 3.14159
 floor_stop_on_slope = false
 floor_snap_length = 1.0
@@ -99,6 +100,15 @@ shape = SubResource("CapsuleShape3D_icbxv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 current = true
 script = ExtResource("2_5mtcw")
+
+[node name="weapon" type="Area3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("5_1ov7e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Camera3D/weapon"]
+shape = SubResource("BoxShape3D_3r8v2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
@@ -150,15 +160,6 @@ material = SubResource("StandardMaterial3D_5ejws")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_8k27h")
-
-[node name="weapon" type="StaticBody3D" parent="." node_paths=PackedStringArray("camera")]
-collision_layer = 2
-collision_mask = 0
-script = ExtResource("5_1ov7e")
-camera = NodePath("../Camera3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="weapon"]
-shape = SubResource("BoxShape3D_3r8v2")
 
 [connection signal="not_walking" from="movement" to="Camera3D" method="_on_movement_not_walking"]
 [connection signal="walking" from="movement" to="Camera3D" method="_on_movement_walking"]

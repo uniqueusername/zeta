@@ -8,8 +8,8 @@ var move_state: MoveState = MoveState.ROAM
 var target: Vector3
 var move_speed: float = 5
 var track_rate: float = 0.3
-var attack_range: float = 3
-var attack_speed: float = 12
+var attack_range: float = 5
+var attack_speed: float = 50
 
 func _physics_process(delta: float) -> void:
 	if move_state == MoveState.ROAM: _roam()
@@ -28,17 +28,21 @@ func _process(delta: float) -> void:
 		if tethered:
 			if move_state == MoveState.ROAM: 
 				move_state = MoveState.WAIT
-				$Timer.start(3)
+				$Timer.start(3 )
 			elif move_state == MoveState.WAIT: 
 				_pick_target()
 				move_state = MoveState.ROAM
 				$Timer.start(1)
 		else:
-			move_state = MoveState.ROAM_HOSTILE
+			if move_state == MoveState.SLIDE:
+				move_state = MoveState.ROAM_HOSTILE
+			elif move_state == MoveState.WAIT:
+				move_state = MoveState.ATTACK
 				
 	if move_state == MoveState.ROAM_HOSTILE:
 		if (%player.global_position - global_position).length() < attack_range:
-			move_state = MoveState.ATTACK
+			move_state = MoveState.WAIT
+			$Timer.start(1)
 			
 func untether() -> void:
 	tethered = false
@@ -59,11 +63,11 @@ func _roam() -> void:
 	velocity = target.normalized() * move_speed
 	
 func _roam_hostile() -> void:
-	target = target.move_toward(%player.global_position - global_position, track_rate)
-	velocity = target.normalized() * move_speed
+	target = target.move_toward(%player.global_position - global_position, track_rate).normalized() * move_speed
+	velocity = Vector3(target.x, velocity.y, target.z)
 	
 func _attack() -> void:
-	target = (%player.global_position - global_position) * attack_speed
+	target = (%player.global_position - global_position).normalized() * attack_speed
 	velocity = target
 	velocity.y = 5
 	move_state = MoveState.SLIDE

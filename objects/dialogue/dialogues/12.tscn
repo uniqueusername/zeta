@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlq6vbq3y4kvj"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_pjtmc"]
+[ext_resource type="Texture2D" uid="uid://bky67o2o1e0pd" path="res://sprites/zeta.jpg" id="2_lrf4g"]
+
+[node name="dialogue" instance=ExtResource("1_pjtmc")]
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_lrf4g")
+
+[node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
+text = "ome, i didn't!"

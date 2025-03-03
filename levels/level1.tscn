@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://edxsxtfgwtu0"]
+[gd_scene load_steps=4 format=3 uid="uid://edxsxtfgwtu0"]
 
-[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_v6iup"]
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="2_5jp85"]
+[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="2_rm1w2"]
 
 [sub_resource type="Environment" id="Environment_iga4p"]
 background_mode = 1
@@ -10,11 +11,25 @@ ambient_light_energy = 0.16
 
 [node name="level1" type="Node3D"]
 
-[node name="MarginContainer" parent="." instance=ExtResource("1_v6iup")]
-text = "goopy woopy"
+[node name="player" parent="." instance=ExtResource("2_5jp85")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iga4p")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -50.113)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("2_rm1w2")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt7udrhwx5aqv"]
+[gd_scene load_steps=5 format=3 uid="uid://bt7udrhwx5aqv"]
 
 [ext_resource type="Script" path="res://objects/dialogue/dialogue.gd" id="1_h6cc2"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_mhuru"]
+[ext_resource type="AudioStream" uid="uid://xyt5ivk7jxr8" path="res://sounds/zeta_text.mp3" id="3_afsub"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dimpn"]
+font_size = 28
 
 [node name="dialogue" type="MarginContainer"]
 anchors_preset = 15
@@ -30,6 +32,7 @@ theme_override_constants/separation = 25
 layout_mode = 2
 size_flags_horizontal = 0
 texture = ExtResource("2_mhuru")
+expand_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -81,7 +84,17 @@ theme_override_constants/margin_bottom = 15
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_vertical = 1
 text = "asfsdfsfdsfzdsdfafse"
 label_settings = SubResource("LabelSettings_dimpn")
+autowrap_mode = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_afsub")
+panning_strength = 0.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

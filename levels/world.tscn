@@ -45,12 +45,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
 
 [node name="floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.999999, 4.65374e-11, 0.00106465, -4.65374e-11, 1, -2.6054e-14, -0.00106465, -2.6054e-14, 0.999999, 0, -1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_qhe18")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_jgbu8")
+
+[node name="floor4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.377587, 0, 0, 0, 1.02979, 0, 0, 0, 0.332639, 10.0375, 13.5218, 16.0884)
+mesh = SubResource("BoxMesh_qhe18")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="floor4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor4/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_jgbu8")
+
+[node name="floor3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.326865, -0.515533, 1.23834e-09, 0.187953, 0.88639, 0.0354111, -0.0201229, -0.0948999, 0.330749, -13.311, 4.75085, -0.355706)
+mesh = SubResource("BoxMesh_qhe18")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="floor3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor3/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_jgbu8")
+
+[node name="floor2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.71392e-08, 1, -4.6542e-11, -0.620872, -4.37114e-08, -0.00106422, -0.000661012, 2.35124e-14, 0.999595, 29.2172, 12.8967, 1.58929)
+mesh = SubResource("BoxMesh_qhe18")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="floor2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor2/StaticBody3D2"]
 shape = SubResource("ConcavePolygonShape3D_jgbu8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]

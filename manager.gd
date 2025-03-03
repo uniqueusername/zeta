@@ -1,5 +1,7 @@
 extends Node
 
+signal door
+
 var dialogue_array: Array = []
 var curr_dialogue: int = 0
 var curr_dialogue_box
@@ -41,4 +43,7 @@ func show_next_dialogue():
 func next_level():
 	curr_level += 1
 	if curr_level == level_array.size(): return
-	get_tree().change_scene_to_packed(level_array[curr_level])	
+	get_tree().change_scene_to_packed(level_array[curr_level])
+	
+func enable_door():
+	door.emit()

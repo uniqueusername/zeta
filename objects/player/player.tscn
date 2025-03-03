@@ -76,9 +76,6 @@ grow_amount = 1.425
 
 [node name="player" type="CharacterBody3D"]
 collision_layer = 4
-wall_min_slide_angle = 3.14159
-floor_stop_on_slope = false
-floor_snap_length = 1.0
 script = ExtResource("1_1w6xj")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]

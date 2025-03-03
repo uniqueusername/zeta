@@ -9,4 +9,4 @@
 texture = ExtResource("2_ddwl4")
 
 [node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
-text = "i am, ome. it's... it's me... please don't do this. we can find another way, we can—"
+text = "i am, ome..."

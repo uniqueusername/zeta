@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://brkqnx6ys6b8" path="res://sounds/ome_text.mp3" id="3_42yl7"]
 
 [node name="dialogue" instance=ExtResource("1_yphdy")]
+callback = true
 
 [node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
 texture = ExtResource("2_dbdiv")

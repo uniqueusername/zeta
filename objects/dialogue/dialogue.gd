@@ -15,7 +15,7 @@ func _on_timer_timeout() -> void:
 	$AudioStreamPlayer2D.play()
 
 func _input(event: InputEvent) -> void:
-	if (event.is_action_pressed("attack") or event.is_action_pressed("advance")) and label.visible_ratio < 1: label.visible_ratio = 1
-	elif (event.is_action_pressed("attack") or event.is_action_pressed("advance")) and label.visible_ratio == 1: 
+	if event.is_action_pressed("advance") and label.visible_ratio < 1: label.visible_ratio = 1
+	elif event.is_action_pressed("advance") and label.visible_ratio == 1: 
 		if callback: manager.show_next_dialogue()
 		queue_free()

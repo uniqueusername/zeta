@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bky67o2o1e0pd" path="res://sprites/zeta.jpg" id="2_tv6ct"]
 
 [node name="dialogue" instance=ExtResource("1_dtf6b")]
+callback = true
 
 [node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
 texture = ExtResource("2_tv6ct")

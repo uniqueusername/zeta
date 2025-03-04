@@ -1,0 +1,96 @@
+[gd_scene load_steps=18 format=3 uid="uid://cnk1cynjto6jb"]
+
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_d6jip"]
+[ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_kkm8t"]
+[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_cpuyl"]
+[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="4_mf7v1"]
+[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="5_7trqu"]
+[ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="6_d6jip"]
+[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="9_tq58f"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d5fsn"]
+
+[sub_resource type="Gradient" id="Gradient_rpm72"]
+colors = PackedColorArray(0, 0, 0, 1, 0.190951, 5.39064e-06, 0.865152, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sue8a"]
+noise_type = 0
+frequency = 0.0146
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_imkbp"]
+seamless = true
+color_ramp = SubResource("Gradient_rpm72")
+noise = SubResource("FastNoiseLite_sue8a")
+
+[sub_resource type="Gradient" id="Gradient_bc5id"]
+colors = PackedColorArray(0.0341354, 1.26494e-05, 0.0572991, 1, 0.0108369, 1.18748e-05, 0.0556437, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ssqrr"]
+gradient = SubResource("Gradient_bc5id")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4efi3"]
+shader = ExtResource("2_kkm8t")
+shader_parameter/sky_background = SubResource("GradientTexture1D_ssqrr")
+shader_parameter/clouds = SubResource("NoiseTexture2D_imkbp")
+shader_parameter/cloud_color = SubResource("CanvasTexture_d5fsn")
+shader_parameter/exposure = 1.0
+
+[sub_resource type="Sky" id="Sky_skqry"]
+sky_material = SubResource("ShaderMaterial_4efi3")
+
+[sub_resource type="Environment" id="Environment_iga4p"]
+background_mode = 2
+sky = SubResource("Sky_skqry")
+sky_custom_fov = 98.5
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.16
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_iain2"]
+
+[node name="level3" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_d6jip")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iga4p")
+
+[node name="walls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="walls"]
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("3_cpuyl")
+
+[node name="door" parent="." instance=ExtResource("4_mf7v1")]
+transform = Transform3D(0.685295, 0.545085, -0.482963, -0.651511, 0.162525, -0.741025, -0.325428, 0.822477, 0.466506, 255, 20, -81)
+
+[node name="tethers" parent="." instance=ExtResource("5_7trqu")]
+
+[node name="tether" parent="tethers" instance=ExtResource("6_d6jip")]
+transform = Transform3D(0.918559, 0.262259, -0.295753, -0.306186, 0.945272, -0.11274, 0.25, 0.194114, 0.948588, -1, -2, -28)
+
+[node name="triggers" type="Node3D" parent="."]
+
+[node name="dialogue1" parent="triggers" instance=ExtResource("9_tq58f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970093, 1, -1)
+
+[node name="kill_zone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="kill_zone"]
+shape = SubResource("WorldBoundaryShape3D_iain2")
+
+[connection signal="body_entered" from="triggers/dialogue1" to="player" method="_next_dialogue"]
+[connection signal="body_entered" from="kill_zone" to="player" method="_on_kill_zone_body_entered"]

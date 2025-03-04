@@ -3,12 +3,13 @@ extends Node
 signal door
 
 var dialogue_array: Array = []
+var level_dialogues: Array = [0, 2, 9, 16]
 var curr_dialogue: int = 0
 var curr_dialogue_box
 var level_first_dialogue: int = 0
 
 var level_array: Array = []
-var curr_level: int = -1
+var curr_level: int = 2
 
 func _ready() -> void:
 	var dir = DirAccess.open("res://objects/dialogue/dialogues/")
@@ -47,12 +48,12 @@ func show_next_dialogue():
 func next_level():
 	if curr_level == level_array.size(): return
 	if get_tree().change_scene_to_packed(level_array[curr_level + 1]) == OK:
-		level_first_dialogue = curr_dialogue
 		curr_level += 1
+		curr_dialogue = level_dialogues[curr_level]
 
 func _enable_door():
 	door.emit()
 	
 func kill_player():
 	get_tree().reload_current_scene()
-	curr_dialogue = level_first_dialogue
+	curr_dialogue = level_dialogues[curr_level]

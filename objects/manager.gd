@@ -5,6 +5,7 @@ signal door
 var dialogue_array: Array = []
 var curr_dialogue: int = 0
 var curr_dialogue_box
+var level_first_dialogue: int = 0
 
 var level_array: Array = []
 var curr_level: int = -1
@@ -31,7 +32,7 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("reset"):
-		get_tree().reload_current_scene()
+		kill_player()
 		
 	if event.is_action_pressed("exit"):
 		get_tree().quit()
@@ -46,7 +47,12 @@ func show_next_dialogue():
 func next_level():
 	curr_level += 1
 	if curr_level == level_array.size(): return
+	level_first_dialogue = curr_dialogue
 	get_tree().change_scene_to_packed(level_array[curr_level])
 
 func _enable_door():
 	door.emit()
+	
+func kill_player():
+	get_tree().reload_current_scene()
+	curr_dialogue = level_first_dialogue

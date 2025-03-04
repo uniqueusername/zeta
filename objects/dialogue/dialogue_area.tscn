@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmnj6p7ur1vik"]
+
+[sub_resource type="GDScript" id="GDScript_bhaw2"]
+script/source = "extends Area3D
+
+func _on_body_entered(body: Node3D) -> void:
+	queue_free()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l57qe"]
+size = Vector3(10, 10, 10)
+
+[node name="dialogue1" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -40)
+collision_layer = 0
+collision_mask = 4
+script = SubResource("GDScript_bhaw2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_l57qe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

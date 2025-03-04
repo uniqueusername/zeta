@@ -16,5 +16,6 @@ extends Area3D
 func _input(event: InputEvent):
 	if event.is_action_pressed("attack"):
 		if has_overlapping_bodies():
-			get_overlapping_bodies()[0].break_tether()
-			movement.instant_redirect()
+			if get_overlapping_bodies().size() > 0:
+				get_overlapping_bodies()[0].break_tether()
+				movement.instant_redirect()

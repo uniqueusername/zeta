@@ -1,11 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://bt7udrhwx5aqv"]
+[gd_scene load_steps=8 format=3 uid="uid://bt7udrhwx5aqv"]
 
 [ext_resource type="Script" path="res://objects/dialogue/dialogue.gd" id="1_h6cc2"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="2_mhuru"]
 [ext_resource type="AudioStream" uid="uid://xyt5ivk7jxr8" path="res://sounds/zeta_text.mp3" id="3_afsub"]
+[ext_resource type="Texture2D" uid="uid://dabyvg6hr87pa" path="res://sprites/controls/dialogue_off.png" id="3_dw4yr"]
+[ext_resource type="Texture2D" uid="uid://dne70e7rcu8s7" path="res://sprites/controls/dialogue_on.png" id="4_clc2b"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dimpn"]
 font_size = 28
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_esirt"]
+frames = 2
+frame_0/texture = ExtResource("3_dw4yr")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("4_clc2b")
+frame_1/duration = 0.5
 
 [node name="dialogue" type="MarginContainer"]
 anchors_preset = 15
@@ -88,6 +97,13 @@ size_flags_vertical = 1
 text = "asfsdfsfdsfzdsdfafse"
 label_settings = SubResource("LabelSettings_dimpn")
 autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+texture = SubResource("AnimatedTexture_esirt")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_afsub")

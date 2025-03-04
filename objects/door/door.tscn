@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://cpks22w15k0qk"]
+
+[ext_resource type="Script" path="res://objects/door/door.gd" id="1_igelw"]
+[ext_resource type="Material" uid="uid://s7fguru3quhc" path="res://materials/door.tres" id="2_vg356"]
+[ext_resource type="Shader" path="res://materials/door.gdshader" id="3_ns0i0"]
+[ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="4_j4m67"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6778c"]
+size = Vector3(5, 5, 0.25)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m7in3"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_32p5d"]
+shader = ExtResource("3_ns0i0")
+shader_parameter/bg_color = null
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/bigStarSlow = 2.0
+shader_parameter/mediumStarSlow = 6.0
+shader_parameter/smallStarSlow = 8.0
+shader_parameter/smallStarAmount = 0.007
+shader_parameter/mediumStarAmount = 0.01
+shader_parameter/bigStarAmount = 0.02
+
+[node name="door" type="Node3D"]
+script = ExtResource("1_igelw")
+
+[node name="StaticBody3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_6778c")
+
+[node name="MeshInstance3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 1, 0, 0, 0)
+texture = SubResource("ViewportTexture_m7in3")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+size = Vector3(5, 0.25, 0.25)
+material = ExtResource("2_vg356")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.5, 0)
+size = Vector3(5, 0.25, 0.25)
+material = ExtResource("2_vg356")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 2.5, -1.09278e-07, 0)
+size = Vector3(5, 0.25, 0.25)
+material = ExtResource("2_vg356")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.5, 1.09278e-07, 0)
+size = Vector3(5, 0.25, 0.25)
+material = ExtResource("2_vg356")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+material = SubResource("ShaderMaterial_32p5d")
+scale = Vector2(4, 4)
+texture = ExtResource("4_j4m67")
+centered = false
+
+[connection signal="body_entered" from="StaticBody3D" to="." method="_on_static_body_3d_body_entered"]

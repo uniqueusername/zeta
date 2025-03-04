@@ -1,14 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://edxsxtfgwtu0"]
+[gd_scene load_steps=26 format=3 uid="uid://g5m72rc28i10"]
 
-[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="2_5jp85"]
-[ext_resource type="Shader" path="res://materials/sky.gdshader" id="2_hwf5u"]
-[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="2_rm1w2"]
-[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="3_rst5b"]
-[ext_resource type="Script" path="res://objects/tutorial.gd" id="9_1ul1x"]
-[ext_resource type="Texture2D" uid="uid://c1lbumoxiyloi" path="res://sprites/controls/move.png" id="9_rnn41"]
-[ext_resource type="Texture2D" uid="uid://bwcf7pjs72id3" path="res://sprites/controls/jump.png" id="10_kgxnh"]
-[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="10_uvu1h"]
-[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="11_xdq0q"]
+[ext_resource type="Shader" path="res://materials/sky.gdshader" id="2_iy1b1"]
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="2_k8mp5"]
+[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_4vkmw"]
+[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="3_wutg2"]
+[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="7_t01yy"]
+[ext_resource type="Script" path="res://objects/tutorial.gd" id="8_v7lxo"]
+[ext_resource type="Texture2D" uid="uid://bwcf7pjs72id3" path="res://sprites/controls/jump.png" id="9_sslje"]
+[ext_resource type="Texture2D" uid="uid://c1lbumoxiyloi" path="res://sprites/controls/move.png" id="10_s2nvc"]
+[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="11_vvgh6"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d5fsn"]
 
@@ -33,7 +33,7 @@ colors = PackedColorArray(0.0341354, 1.26494e-05, 0.0572991, 1, 0.0108369, 1.187
 gradient = SubResource("Gradient_bc5id")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efi3"]
-shader = ExtResource("2_hwf5u")
+shader = ExtResource("2_iy1b1")
 shader_parameter/exposure = 1.0
 shader_parameter/sky_background = SubResource("GradientTexture1D_ssqrr")
 shader_parameter/clouds = SubResource("NoiseTexture2D_imkbp")
@@ -42,7 +42,7 @@ shader_parameter/cloud_color = SubResource("CanvasTexture_d5fsn")
 [sub_resource type="Sky" id="Sky_skqry"]
 sky_material = SubResource("ShaderMaterial_4efi3")
 
-[sub_resource type="Environment" id="Environment_iga4p"]
+[sub_resource type="Environment" id="Environment_qt38k"]
 background_mode = 2
 sky = SubResource("Sky_skqry")
 sky_custom_fov = 98.5
@@ -51,19 +51,19 @@ ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_energy = 0.16
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ijmgt"]
-atlas = ExtResource("10_kgxnh")
+atlas = ExtResource("9_sslje")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsa4q"]
-atlas = ExtResource("10_kgxnh")
+atlas = ExtResource("9_sslje")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3vruj"]
-atlas = ExtResource("9_rnn41")
+atlas = ExtResource("10_s2nvc")
 region = Rect2(0, 0, 14, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3dmp"]
-atlas = ExtResource("9_rnn41")
+atlas = ExtResource("10_s2nvc")
 region = Rect2(14, 0, 14, 15)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4w6uk"]
@@ -97,8 +97,9 @@ size = Vector3(10, 10, 10)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_iain2"]
 
 [node name="level1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.27594, -13.056, 13.0161)
 
-[node name="player" parent="." instance=ExtResource("2_5jp85")]
+[node name="player" parent="." instance=ExtResource("2_k8mp5")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
@@ -106,7 +107,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_iga4p")
+environment = SubResource("Environment_qt38k")
 
 [node name="walls" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
@@ -115,26 +116,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 1, 30)
-material = ExtResource("2_rm1w2")
+material = ExtResource("3_4vkmw")
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="walls"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -39)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 1, 30)
-material = ExtResource("2_rm1w2")
+material = ExtResource("3_4vkmw")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="walls"]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -8, 0, -76)
-use_collision = true
-collision_mask = 0
-size = Vector3(10, 1, 30)
-material = ExtResource("2_rm1w2")
+[node name="door" parent="." instance=ExtResource("3_wutg2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -70)
 
-[node name="door" parent="." instance=ExtResource("3_rst5b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 5, -70)
-
-[node name="tethers" parent="." instance=ExtResource("11_xdq0q")]
+[node name="tethers" parent="." instance=ExtResource("7_t01yy")]
 
 [node name="tutorial" type="Control" parent="."]
 layout_mode = 3
@@ -145,7 +139,7 @@ anchor_bottom = 0.4
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource("9_1ul1x")
+script = ExtResource("8_v7lxo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="tutorial"]
 scale = Vector2(2, 2)
@@ -164,7 +158,7 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="triggers/jump"]
 shape = SubResource("BoxShape3D_l57qe")
 
-[node name="dialogue1" parent="triggers" instance=ExtResource("10_uvu1h")]
+[node name="dialogue1" parent="triggers" instance=ExtResource("11_vvgh6")]
 
 [node name="kill_zone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)

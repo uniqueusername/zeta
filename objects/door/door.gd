@@ -1,6 +1,6 @@
 extends Node3D
 
-var dist: float = 25
+var dist: float = 15
 var enabled: bool = false
 
 func _ready():

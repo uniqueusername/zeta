@@ -1,7 +1,7 @@
 extends Camera3D
 
 const SENSITIVITY: float = 0.001
-const CONTROLLER_SENSITIVITY: float = 0.15
+const CONTROLLER_SENSITIVITY: float = 0.1
 const AUTO_ROTATE_RATE: float = 0.01
 const DASH_ROTATION: float = 0.02
 

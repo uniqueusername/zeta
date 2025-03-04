@@ -11,17 +11,13 @@ config_version=5
 [application]
 
 config/name="zeta"
-run/main_scene="res://levels/world.tscn"
+run/main_scene="res://levels/level1.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-manager="*res://manager.gd"
-
-[display]
-
-window/size/mode=3
+manager="*res://objects/manager.gd"
 
 [input]
 

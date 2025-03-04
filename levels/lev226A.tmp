@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://edxsxtfgwtu0"]
+[gd_scene load_steps=12 format=3 uid="uid://edxsxtfgwtu0"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="2_5jp85"]
 [ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="2_rm1w2"]
 [ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="3_0g5rr"]
-[ext_resource type="Script" path="res://objects/tether/tethers.gd" id="3_7h8ri"]
 [ext_resource type="Script" path="res://objects/door/door.gd" id="4_hiwbu"]
 [ext_resource type="Shader" path="res://materials/door.gdshader" id="5_0pvxe"]
 [ext_resource type="Material" uid="uid://s7fguru3quhc" path="res://materials/door.tres" id="5_4xb1w"]
@@ -58,13 +57,7 @@ collision_mask = 0
 size = Vector3(10, 1, 30)
 material = ExtResource("2_rm1w2")
 
-[node name="tethers" type="Node3D" parent="."]
-script = ExtResource("3_7h8ri")
-
-[node name="tether" parent="tethers" instance=ExtResource("3_0g5rr")]
-
-[node name="tether2" parent="tethers" instance=ExtResource("3_0g5rr")]
-transform = Transform3D(0.965926, -0.258819, 0, 0.25, 0.933013, 0.258819, -0.0669873, -0.25, 0.965926, 2, 7, -31)
+[node name="tether" parent="." instance=ExtResource("3_0g5rr")]
 
 [node name="door" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -85)

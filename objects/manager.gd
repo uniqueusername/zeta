@@ -7,7 +7,7 @@ var curr_dialogue: int = 0
 var curr_dialogue_box
 
 var level_array: Array = []
-var curr_level: int = 0
+var curr_level: int = -1
 
 func _ready() -> void:
 	var dir = DirAccess.open("res://objects/dialogue/dialogues/")
@@ -18,13 +18,16 @@ func _ready() -> void:
 			dialogue_array.append(ResourceLoader.load(dir.get_current_dir() + "/" + file))
 			file = dir.get_next()
 			
-	dir = DirAccess.open("res://levels/")
-	if dir:
-		dir.list_dir_begin()
-		var file = dir.get_next()
+	var dir2 = DirAccess.open("res://levels/")
+	if dir2:
+		dir2.list_dir_begin()
+		var file = dir2.get_next()
 		while file:
-			level_array.append(ResourceLoader.load(dir.get_current_dir() + "/" + file))
-			file = dir.get_next()
+			if file.ends_with(".tscn"):
+				level_array.append(ResourceLoader.load(dir2.get_current_dir() + "/" + file))
+			file = dir2.get_next()
+	
+	next_level()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("reset"):
@@ -44,6 +47,6 @@ func next_level():
 	curr_level += 1
 	if curr_level == level_array.size(): return
 	get_tree().change_scene_to_packed(level_array[curr_level])
-	
-func enable_door():
+
+func _enable_door():
 	door.emit()

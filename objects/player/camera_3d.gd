@@ -14,6 +14,11 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotation.x += event.get_screen_relative().y * -1 * SENSITIVITY;
 		rotation.y += event.get_screen_relative().x * -1 * SENSITIVITY;
+		
+	if event.is_action_pressed("unlock_mouse"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	elif event.is_action_released("unlock_mouse"):
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _physics_process(delta: float) -> void:
 	var input_dir: Vector2 = Input.get_vector("cam_down", "cam_up", "cam_right", "cam_left", 0)

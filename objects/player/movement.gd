@@ -9,6 +9,9 @@ signal not_walking
 @export var camera: Camera3D
 @export var speed_label: Label
 @export var hook_ray: RayCast3D
+@export var slide_audio: AudioStreamPlayer3D
+@export var slide_stop_audio: AudioStreamPlayer3D
+@export var land_audio: AudioStreamPlayer3D
 
 # constants
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity") * 4
@@ -19,7 +22,7 @@ const max_walk_vel: float = 15
 
 ## sliding
 const slide_accel: float = 15
-const slide_friction: float = 50
+const slide_friction: float = 70
 const slide_turn_allowance: float = 0.8
 
 ## dashing
@@ -42,6 +45,7 @@ const slide_fov: float = 100
 # variables
 var sliding: bool = false
 var hooked: bool = false
+var in_air_last_frame: bool = false
 
 func _physics_process(delta) -> void:
 	var input_dir: Vector2 = Input.get_vector("left", "right", "backward", "forward")
@@ -55,6 +59,16 @@ func _physics_process(delta) -> void:
 	p.move_and_slide()
 	
 	_update_speed_label()
+	
+	if not p.is_on_floor() and slide_audio.playing:
+		slide_audio.stop()
+		slide_stop_audio.play()
+		
+	if in_air_last_frame and p.is_on_floor():
+		if sliding: slide_audio.play()
+		else: land_audio.play()
+		
+	in_air_last_frame = not p.is_on_floor()
 	
 func _process(delta) -> void:
 	if hook_ray.is_colliding():
@@ -142,11 +156,14 @@ func _set_slide(sliding: bool):
 		self.sliding = false
 		_tween_player_height(1)
 		_tween_camera_fov(default_fov)
+		slide_audio.stop()
+		slide_stop_audio.play()
 	elif p.is_on_floor():
 		self.sliding = true
 		not_walking.emit()
 		_tween_player_height(0.8)
 		_tween_camera_fov(slide_fov)
+		slide_audio.play()
 
 func _update_speed_label():
 	if speed_label: speed_label.text = str(int(p.velocity.length()))
@@ -180,7 +197,10 @@ func _fire_hook() -> void:
 		hooked = true
 		$hook.global_position = hook_ray.get_collision_point()
 		$hook/chain.visible = true
+		$hook/hook.play()
+		$hook/hook_hit.play()
 
 func _release_hook() -> void:
 	hooked = false
 	$hook/chain.visible = false
+	$hook/hook.stop()

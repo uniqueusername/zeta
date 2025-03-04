@@ -45,10 +45,10 @@ func show_next_dialogue():
 	curr_dialogue += 1
 
 func next_level():
-	curr_level += 1
 	if curr_level == level_array.size(): return
-	level_first_dialogue = curr_dialogue
-	get_tree().change_scene_to_packed(level_array[curr_level])
+	if get_tree().change_scene_to_packed(level_array[curr_level + 1]) == OK:
+		level_first_dialogue = curr_dialogue
+		curr_level += 1
 
 func _enable_door():
 	door.emit()

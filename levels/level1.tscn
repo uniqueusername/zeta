@@ -125,14 +125,56 @@ size = Vector3(10, 1, 30)
 material = ExtResource("2_rm1w2")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="walls"]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, -8, 0, -76)
+transform = Transform3D(0.965926, 0.258819, 0, -0.25, 0.933013, -0.258819, -0.0669873, 0.25, 0.965926, -8, 0, -76)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 1, 30)
 material = ExtResource("2_rm1w2")
 
+[node name="CSGBox3D4" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.947604, -0.0610312, 0.313563, -0.0261163, 0.963493, 0.266457, -0.318378, -0.260684, 0.911416, 1.97885, -28.4687, -102.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 49)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.908556, 0.190419, 0.371843, -0.178865, 0.981679, -0.0656752, -0.377536, -0.00684029, 0.925969, -19.0211, -39.4687, -132.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.876265, -0.325932, 0.354863, 0.386888, 0.914926, -0.115011, -0.287188, 0.238072, 0.927817, -11.0211, -38.4687, -144.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.676135, 0.0514636, 0.734979, 0.146911, 0.968108, -0.202937, -0.721983, 0.245189, 0.647011, -23.0211, -39.4687, -152.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.224559, 0.167164, 0.960016, 0.963323, -0.186609, -0.192839, 0.146912, 0.968108, -0.202937, -22.6843, -38.0237, -141.121)
+use_collision = true
+collision_mask = 0
+size = Vector3(19, 1, 10)
+material = ExtResource("2_rm1w2")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.554222, -0.679065, 0.481361, 0.25493, 0.412032, 0.87478, -0.792369, 0.607535, -0.055243, -51.7919, -38.6985, -146.019)
+use_collision = true
+collision_mask = 0
+size = Vector3(30, 1, 29)
+material = ExtResource("2_rm1w2")
+
 [node name="door" parent="." instance=ExtResource("3_rst5b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 5, -70)
+transform = Transform3D(0.220615, -0.39281, 0.892765, 0.158494, 0.91759, 0.364567, -0.962397, 0.0610685, 0.264692, -40, -43, -163)
 
 [node name="tethers" parent="." instance=ExtResource("11_xdq0q")]
 

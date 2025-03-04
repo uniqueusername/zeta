@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmghttwsl1fu3"]
 
-[ext_resource type="Script" path="res://objects/tether/tethers.gd" id="1_yoabh"]
+[ext_resource type="Script" uid="uid://nm6j68talerm" path="res://objects/tether/tethers.gd" id="1_yoabh"]
 
 [node name="tethers" type="Node3D"]
 script = ExtResource("1_yoabh")

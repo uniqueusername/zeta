@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://2rvdmrrvrqty"]
 
 [ext_resource type="Material" uid="uid://crnq4b0bqi22a" path="res://materials/tether.tres" id="1_t6nuy"]
-[ext_resource type="Script" path="res://objects/tether/tether.gd" id="2_750cg"]
+[ext_resource type="Script" uid="uid://b28tegd2j8y8p" path="res://objects/tether/tether.gd" id="2_750cg"]
 
 [node name="tether" type="CSGCylinder3D"]
 transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0, 7, -31)

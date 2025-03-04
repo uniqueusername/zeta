@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://ccuk3rh4ggkyk"]
 
-[ext_resource type="Script" path="res://objects/tethered/tethered.gd" id="1_52jp8"]
-[ext_resource type="Script" path="res://objects/tethered/tether.gd" id="3_fmxlr"]
+[ext_resource type="Script" uid="uid://c38mok8r4h2l8" path="res://objects/tethered/tethered.gd" id="1_52jp8"]
+[ext_resource type="Script" uid="uid://dw1crt5j5cr0k" path="res://objects/tethered/tether.gd" id="3_fmxlr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dwx3f"]
 

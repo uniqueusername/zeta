@@ -1,11 +1,11 @@
 [gd_scene load_steps=26 format=3 uid="uid://g5m72rc28i10"]
 
-[ext_resource type="Shader" path="res://materials/sky.gdshader" id="2_iy1b1"]
+[ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_iy1b1"]
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="2_k8mp5"]
 [ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_4vkmw"]
 [ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="3_wutg2"]
 [ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="7_t01yy"]
-[ext_resource type="Script" path="res://objects/tutorial.gd" id="8_v7lxo"]
+[ext_resource type="Script" uid="uid://bwjwdc38odh6j" path="res://objects/tutorial.gd" id="8_v7lxo"]
 [ext_resource type="Texture2D" uid="uid://bwcf7pjs72id3" path="res://sprites/controls/jump.png" id="9_sslje"]
 [ext_resource type="Texture2D" uid="uid://c1lbumoxiyloi" path="res://sprites/controls/move.png" id="10_s2nvc"]
 [ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="11_vvgh6"]
@@ -34,10 +34,10 @@ gradient = SubResource("Gradient_bc5id")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efi3"]
 shader = ExtResource("2_iy1b1")
-shader_parameter/exposure = 1.0
 shader_parameter/sky_background = SubResource("GradientTexture1D_ssqrr")
 shader_parameter/clouds = SubResource("NoiseTexture2D_imkbp")
 shader_parameter/cloud_color = SubResource("CanvasTexture_d5fsn")
+shader_parameter/exposure = 1.0
 
 [sub_resource type="Sky" id="Sky_skqry"]
 sky_material = SubResource("ShaderMaterial_4efi3")

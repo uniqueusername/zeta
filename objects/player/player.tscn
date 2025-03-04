@@ -1,11 +1,11 @@
 [gd_scene load_steps=17 format=3 uid="uid://dfubhxrrlg12v"]
 
-[ext_resource type="Script" path="res://objects/player/player.gd" id="1_1w6xj"]
-[ext_resource type="Script" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
-[ext_resource type="Script" path="res://objects/player/movement.gd" id="2_d8xfq"]
-[ext_resource type="Shader" path="res://materials/outline.gdshader" id="2_h6ki6"]
+[ext_resource type="Script" uid="uid://vxwgr3kmq8mg" path="res://objects/player/player.gd" id="1_1w6xj"]
+[ext_resource type="Script" uid="uid://dr0n25vwqamoj" path="res://objects/player/camera_3d.gd" id="2_5mtcw"]
+[ext_resource type="Script" uid="uid://t0bagdwqh6lb" path="res://objects/player/movement.gd" id="2_d8xfq"]
+[ext_resource type="Shader" uid="uid://clgr71k54uv7c" path="res://materials/outline.gdshader" id="2_h6ki6"]
 [ext_resource type="Texture2D" uid="uid://cer16c8eyx2l1" path="res://objects/player/chain.png" id="3_htvnb"]
-[ext_resource type="Script" path="res://objects/player/weapon.gd" id="5_1ov7e"]
+[ext_resource type="Script" uid="uid://dqnpv7tb2fftx" path="res://objects/player/weapon.gd" id="5_1ov7e"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_moee5"]
 font_size = 48
@@ -40,8 +40,8 @@ tracks/0/keys = PackedFloat32Array(0, 1, 0, 1.5, 0, 0.0333333, 1, 0, 1.49979, 0,
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_thadj"]
 _data = {
-"RESET": SubResource("Animation_jn7cq"),
-"bob": SubResource("Animation_5pjk0")
+&"RESET": SubResource("Animation_jn7cq"),
+&"bob": SubResource("Animation_5pjk0")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o7r8a"]
@@ -123,7 +123,7 @@ shape = SubResource("BoxShape3D_3r8v2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
-"": SubResource("AnimationLibrary_thadj")
+&"": SubResource("AnimationLibrary_thadj")
 }
 
 [node name="RayCast3D" type="RayCast3D" parent="Camera3D"]

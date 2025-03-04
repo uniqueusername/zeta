@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cpks22w15k0qk"]
 
-[ext_resource type="Script" path="res://objects/door/door.gd" id="1_igelw"]
+[ext_resource type="Script" uid="uid://jwwdnrsnctr" path="res://objects/door/door.gd" id="1_igelw"]
 [ext_resource type="Material" uid="uid://s7fguru3quhc" path="res://materials/door.tres" id="2_vg356"]
-[ext_resource type="Shader" path="res://materials/door.gdshader" id="3_ns0i0"]
+[ext_resource type="Shader" uid="uid://ce20sulpp16g5" path="res://materials/door.gdshader" id="3_ns0i0"]
 [ext_resource type="Texture2D" uid="uid://dhld8jumvmmw6" path="res://icon.svg" id="4_j4m67"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6778c"]
@@ -13,7 +13,7 @@ viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_32p5d"]
 shader = ExtResource("3_ns0i0")
-shader_parameter/bg_color = null
+shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/bigStarSlow = 2.0
 shader_parameter/mediumStarSlow = 6.0

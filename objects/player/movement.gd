@@ -113,7 +113,7 @@ func _handle_walking(movement_dir: Vector2, delta: float) -> void:
 
 func _handle_sliding(movement_dir: Vector2, delta: float) -> void:
 	var curr_vel: Vector2 = _get_2d_player_vel()
-	var normalized_dot: float = (curr_vel.normalized().dot(movement_dir.normalized()) + 0.1) ** 10
+	var normalized_dot: float = (curr_vel.normalized().dot(movement_dir.normalized()) + 0.1) * 10
 	
 	if movement_dir and normalized_dot > 0:
 		_set_player_vel_from_2d(curr_vel.move_toward(curr_vel + movement_dir * normalized_dot, slide_accel * delta))

@@ -9,7 +9,7 @@ var curr_dialogue_box
 var level_first_dialogue: int = 0
 
 var level_array: Array = []
-var curr_level: int = 2
+var curr_level: int = 1
 
 func _ready() -> void:
 	var dir = DirAccess.open("res://objects/dialogue/dialogues/")

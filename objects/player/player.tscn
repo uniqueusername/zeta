@@ -134,6 +134,7 @@ floor_max_angle = 0.523599
 script = ExtResource("1_1w6xj")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -239,6 +240,7 @@ stream = ExtResource("15_xlkbi")
 attenuation_model = 2
 volume_db = -10.89
 unit_size = 98.55
+max_db = -10.969
 attenuation_filter_cutoff_hz = 8976.0
 attenuation_filter_db = -40.0
 parameters/looping = true

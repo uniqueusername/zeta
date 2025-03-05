@@ -1,12 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnk1cynjto6jb"]
+[gd_scene load_steps=17 format=3 uid="uid://dvkrk7buk07ys"]
 
 [ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_d6jip"]
 [ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_kkm8t"]
 [ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_cpuyl"]
 [ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="4_mf7v1"]
 [ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="5_7trqu"]
-[ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="6_d6jip"]
-[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="9_tq58f"]
+[ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="6_udvx3"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d5fsn"]
 
@@ -50,7 +49,7 @@ ambient_light_energy = 0.16
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_iain2"]
 
-[node name="level3" type="Node3D"]
+[node name="level1" type="Node3D"]
 
 [node name="player" parent="." instance=ExtResource("1_d6jip")]
 unique_name_in_owner = true
@@ -66,23 +65,125 @@ environment = SubResource("Environment_iga4p")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
 use_collision = true
 collision_mask = 0
-size = Vector3(10, 1, 30)
+size = Vector3(10, 1, 39)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 0.99863, 0.052336, 0, -0.052336, 0.99863, 0, 5, -0.499999)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 31)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.933013, -0.25, -0.258819, 0.258819, 0.965926, 0, 0.25, -0.0669873, 0.965926, -5.51764, 5, 34.9319)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 36)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.965926, 0.258819, 1.92835e-09, -0.258819, 0.965926, 3.34e-09, -2.98023e-08, 0, 1, -18.5176, 5, 106.432)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 87)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.27854, 0.0736005, 0.9576, -0.191317, 0.972825, -0.13042, -0.941176, -0.219533, -0.25689, 38.658, -10.7829, 140.158)
+use_collision = true
+collision_mask = 0
+size = Vector3(28, 1, 34)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="walls/CSGBox3D5"]
+transform = Transform3D(0.678626, -0.734073, 0.0245617, 0.734476, 0.67809, -0.0271716, 0.00329091, 0.0364793, 0.999329, 18.4708, 4.07504, 0.457506)
+use_collision = true
+collision_mask = 0
+size = Vector3(19, 1, 34)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="walls/CSGBox3D5"]
+transform = Transform3D(0.885813, -0.0502708, 0.461312, 0.463509, 0.0481945, -0.884782, 0.0222459, 0.997573, 0.0659924, -0.775391, -7.16273, 0.306959)
+use_collision = true
+collision_mask = 0
+size = Vector3(24, 1, 22)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.131816, 0.289309, 0.948116, -0.584255, -0.795346, 0.161465, 0.800794, -0.532658, 0.273869, 7.41389, 28.6375, 164.542)
+use_collision = true
+collision_mask = 0
+size = Vector3(19, 1, 21)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D13" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.499959, -0.0646426, 0.863633, 0.445194, -0.874549, 0.192265, 0.742861, 0.480609, 0.466017, 145.414, 28.6375, 127.542)
+use_collision = true
+collision_mask = 0
+size = Vector3(19, 1, 21)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.282341, 0, 0.959314, 0, 1, 0, -0.959314, 0, -0.282341, 60.658, -7.78286, 145.158)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.52101, 0, 0.853551, 0, 1, 0, -0.853551, 0, -0.52101, 64.658, -5.78286, 144.158)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.282341, 0, 0.959314, 0, 1, 0, -0.959314, 0, -0.282341, 74.1405, -3.78286, 137.451)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 23)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-4.47035e-08, 7.45058e-09, 1, 1.49012e-08, 1, 3.35761e-09, -1, -2.98023e-08, -1.45271e-08, 135.937, -20.1823, 121.069)
+use_collision = true
+collision_mask = 0
+size = Vector3(17, 1, 68)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.25, -0.0669873, 0.965926, 0.258819, 0.965926, 7.0031e-09, -0.933013, 0.25, 0.258819, 215.312, -21.6118, 129.391)
+use_collision = true
+collision_mask = 0
+size = Vector3(13, 1, 68)
+material = ExtResource("3_cpuyl")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="walls/CSGBox3D7"]
+transform = Transform3D(0.970185, -0.00114119, 0.242362, 0.24004, -0.133669, -0.961516, 0.0334937, 0.991026, -0.12941, 0.0745354, -1.26997, 35.0755)
+use_collision = true
+collision_mask = 0
+size = Vector3(18, 1, 17)
 material = ExtResource("3_cpuyl")
 
 [node name="door" parent="." instance=ExtResource("4_mf7v1")]
-transform = Transform3D(0.685295, 0.545085, -0.482963, -0.651511, 0.162525, -0.741025, -0.325428, 0.822477, 0.466506, 255, 20, -81)
+transform = Transform3D(-0.158494, -0.91759, -0.364567, 0.220615, -0.39281, 0.892765, -0.962397, 0.0610685, 0.264692, 236, 0, 129)
 
 [node name="tethers" parent="." instance=ExtResource("5_7trqu")]
 
-[node name="tether" parent="tethers" instance=ExtResource("6_d6jip")]
-transform = Transform3D(0.918559, 0.262259, -0.295753, -0.306186, 0.945272, -0.11274, 0.25, 0.194114, 0.948588, -1, -2, -28)
+[node name="tether" parent="tethers" instance=ExtResource("6_udvx3")]
+transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0, 0, -37)
+
+[node name="tether2" parent="tethers" instance=ExtResource("6_udvx3")]
+transform = Transform3D(0.841506, 0.408494, 0.353553, -0.473153, 0.873128, 0.117363, -0.260755, -0.266046, 0.928023, -25, 15, 129)
+
+[node name="tether3" parent="tethers" instance=ExtResource("6_udvx3")]
+transform = Transform3D(0.891785, -0.346805, 0.290598, 0.313788, 0.0113348, -0.949425, 0.325972, 0.937869, 0.118932, 249, -19, 83)
 
 [node name="triggers" type="Node3D" parent="."]
-
-[node name="dialogue1" parent="triggers" instance=ExtResource("9_tq58f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970093, 1, -1)
 
 [node name="kill_zone" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
@@ -92,5 +193,4 @@ collision_mask = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="kill_zone"]
 shape = SubResource("WorldBoundaryShape3D_iain2")
 
-[connection signal="body_entered" from="triggers/dialogue1" to="player" method="_next_dialogue"]
 [connection signal="body_entered" from="kill_zone" to="player" method="_on_kill_zone_body_entered"]

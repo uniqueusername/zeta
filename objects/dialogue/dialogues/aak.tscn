@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://c3hj7nx3enuc4"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_mtod7"]
+[ext_resource type="Texture2D" uid="uid://dnm15d6xb6erk" path="res://sprites/ome.png" id="2_ah136"]
+[ext_resource type="AudioStream" uid="uid://brkqnx6ys6b8" path="res://sounds/ome_text.mp3" id="3_34oaa"]
+
+[node name="dialogue" instance=ExtResource("1_mtod7")]
+callback = true
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_ah136")
+
+[node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
+text = "almost an entire population, subsumed. how many are left?"
+
+[node name="AudioStreamPlayer2D" parent="." index="1"]
+stream = ExtResource("3_34oaa")

@@ -1,0 +1,222 @@
+[gd_scene load_steps=26 format=3 uid="uid://bgbsct0rgw3iy"]
+
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_dpj73"]
+[ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_0r17i"]
+[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_3mfy1"]
+[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="4_1d27u"]
+[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="5_1h0f4"]
+[ext_resource type="Script" uid="uid://bwjwdc38odh6j" path="res://objects/tutorial.gd" id="6_w3cf3"]
+[ext_resource type="Texture2D" uid="uid://bwcf7pjs72id3" path="res://sprites/controls/jump.png" id="7_afsjk"]
+[ext_resource type="Texture2D" uid="uid://c1lbumoxiyloi" path="res://sprites/controls/move.png" id="8_1jclc"]
+[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="9_02y7u"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d5fsn"]
+
+[sub_resource type="Gradient" id="Gradient_rpm72"]
+colors = PackedColorArray(0, 0, 0, 1, 0.190951, 5.39064e-06, 0.865152, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sue8a"]
+noise_type = 0
+frequency = 0.0146
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_imkbp"]
+seamless = true
+color_ramp = SubResource("Gradient_rpm72")
+noise = SubResource("FastNoiseLite_sue8a")
+
+[sub_resource type="Gradient" id="Gradient_bc5id"]
+colors = PackedColorArray(0.0341354, 1.26494e-05, 0.0572991, 1, 0.0108369, 1.18748e-05, 0.0556437, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ssqrr"]
+gradient = SubResource("Gradient_bc5id")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4efi3"]
+shader = ExtResource("2_0r17i")
+shader_parameter/sky_background = SubResource("GradientTexture1D_ssqrr")
+shader_parameter/clouds = SubResource("NoiseTexture2D_imkbp")
+shader_parameter/cloud_color = SubResource("CanvasTexture_d5fsn")
+shader_parameter/exposure = 1.0
+
+[sub_resource type="Sky" id="Sky_skqry"]
+sky_material = SubResource("ShaderMaterial_4efi3")
+
+[sub_resource type="Environment" id="Environment_iga4p"]
+background_mode = 2
+sky = SubResource("Sky_skqry")
+sky_custom_fov = 98.5
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.16
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijmgt"]
+atlas = ExtResource("7_afsjk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xsa4q"]
+atlas = ExtResource("7_afsjk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3vruj"]
+atlas = ExtResource("8_1jclc")
+region = Rect2(0, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s3dmp"]
+atlas = ExtResource("8_1jclc")
+region = Rect2(14, 0, 14, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4w6uk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijmgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xsa4q")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3vruj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s3dmp")
+}],
+"loop": true,
+"name": &"move",
+"speed": 2.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l57qe"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_iain2"]
+
+[node name="level1" type="Node3D"]
+
+[node name="player" parent="." instance=ExtResource("1_dpj73")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.149025, 0.886157, 0.438768, -0.0904017, -0.454074, 0.886366, 0.984692, 0.0924249, 0.147779, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iga4p")
+
+[node name="walls" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="walls"]
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -39)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.965926, 0.258819, 0, -0.25, 0.933013, -0.258819, -0.0669873, 0.25, 0.965926, -8, 0, -76)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 30)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.947604, -0.0610312, 0.313563, -0.0261163, 0.963493, 0.266457, -0.318378, -0.260684, 0.911416, 1.97885, -28.4687, -102.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 49)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.908556, 0.190419, 0.371843, -0.178865, 0.981679, -0.0656752, -0.377536, -0.00684029, 0.925969, -19.0211, -39.4687, -132.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.876265, -0.325932, 0.354863, 0.386888, 0.914926, -0.115011, -0.287188, 0.238072, 0.927817, -11.0211, -38.4687, -144.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.676135, 0.0514636, 0.734979, 0.146911, 0.968108, -0.202937, -0.721983, 0.245189, 0.647011, -23.0211, -39.4687, -152.342)
+use_collision = true
+collision_mask = 0
+size = Vector3(10, 1, 10)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="walls"]
+transform = Transform3D(0.224559, 0.167164, 0.960016, 0.963323, -0.186609, -0.192839, 0.146912, 0.968108, -0.202937, -22.6843, -38.0237, -141.121)
+use_collision = true
+collision_mask = 0
+size = Vector3(19, 1, 10)
+material = ExtResource("3_3mfy1")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="walls"]
+transform = Transform3D(-0.554222, -0.679065, 0.481361, 0.25493, 0.412032, 0.87478, -0.792369, 0.607535, -0.055243, -51.7919, -38.6985, -146.019)
+use_collision = true
+collision_mask = 0
+size = Vector3(30, 1, 29)
+material = ExtResource("3_3mfy1")
+
+[node name="door" parent="." instance=ExtResource("4_1d27u")]
+transform = Transform3D(0.220615, -0.39281, 0.892765, 0.158494, 0.91759, 0.364567, -0.962397, 0.0610685, 0.264692, -40, -43, -163)
+
+[node name="tethers" parent="." instance=ExtResource("5_1h0f4")]
+
+[node name="tutorial" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.7
+anchor_top = 0.4
+anchor_right = 0.7
+anchor_bottom = 0.4
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("6_w3cf3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="tutorial"]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4w6uk")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.974547
+
+[node name="triggers" type="Node3D" parent="."]
+
+[node name="jump" type="Area3D" parent="triggers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -21)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="triggers/jump"]
+shape = SubResource("BoxShape3D_l57qe")
+
+[node name="dialogue1" parent="triggers" instance=ExtResource("9_02y7u")]
+
+[node name="kill_zone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="kill_zone"]
+shape = SubResource("WorldBoundaryShape3D_iain2")
+
+[connection signal="body_entered" from="triggers/jump" to="tutorial" method="_jump_trigger"]
+[connection signal="body_entered" from="triggers/dialogue1" to="player" method="_next_dialogue"]
+[connection signal="body_entered" from="triggers/dialogue1" to="tutorial" method="_after_jump"]
+[connection signal="body_entered" from="kill_zone" to="player" method="_on_kill_zone_body_entered"]

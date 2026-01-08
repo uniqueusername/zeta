@@ -1,12 +1,12 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnk1cynjto6jb"]
+[gd_scene load_steps=18 format=3 uid="uid://b3nqkigsf2xmi"]
 
-[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_d6jip"]
-[ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_kkm8t"]
-[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_cpuyl"]
-[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="4_mf7v1"]
-[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="5_7trqu"]
-[ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="6_d6jip"]
-[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="9_tq58f"]
+[ext_resource type="PackedScene" uid="uid://dfubhxrrlg12v" path="res://objects/player/player.tscn" id="1_lbjdw"]
+[ext_resource type="Shader" uid="uid://b837h44aa34r5" path="res://materials/sky.gdshader" id="2_aa5g4"]
+[ext_resource type="Material" uid="uid://bkaxynlcmjrco" path="res://materials/floor.tres" id="3_bv1q7"]
+[ext_resource type="PackedScene" uid="uid://cpks22w15k0qk" path="res://objects/door/door.tscn" id="4_82oy2"]
+[ext_resource type="PackedScene" uid="uid://cmghttwsl1fu3" path="res://objects/tether/tethers.tscn" id="5_52aqk"]
+[ext_resource type="PackedScene" uid="uid://2rvdmrrvrqty" path="res://objects/tether/tether.tscn" id="6_g77m3"]
+[ext_resource type="PackedScene" uid="uid://dmnj6p7ur1vik" path="res://objects/dialogue/dialogue_area.tscn" id="7_wqtt1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d5fsn"]
 
@@ -31,7 +31,7 @@ colors = PackedColorArray(0.0341354, 1.26494e-05, 0.0572991, 1, 0.0108369, 1.187
 gradient = SubResource("Gradient_bc5id")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4efi3"]
-shader = ExtResource("2_kkm8t")
+shader = ExtResource("2_aa5g4")
 shader_parameter/sky_background = SubResource("GradientTexture1D_ssqrr")
 shader_parameter/clouds = SubResource("NoiseTexture2D_imkbp")
 shader_parameter/cloud_color = SubResource("CanvasTexture_d5fsn")
@@ -52,7 +52,7 @@ ambient_light_energy = 0.16
 
 [node name="level3" type="Node3D"]
 
-[node name="player" parent="." instance=ExtResource("1_d6jip")]
+[node name="player" parent="." instance=ExtResource("1_lbjdw")]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
@@ -69,19 +69,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.113)
 use_collision = true
 collision_mask = 0
 size = Vector3(10, 1, 30)
-material = ExtResource("3_cpuyl")
+material = ExtResource("3_bv1q7")
 
-[node name="door" parent="." instance=ExtResource("4_mf7v1")]
+[node name="door" parent="." instance=ExtResource("4_82oy2")]
 transform = Transform3D(0.685295, 0.545085, -0.482963, -0.651511, 0.162525, -0.741025, -0.325428, 0.822477, 0.466506, 255, 20, -81)
 
-[node name="tethers" parent="." instance=ExtResource("5_7trqu")]
+[node name="tethers" parent="." instance=ExtResource("5_52aqk")]
 
-[node name="tether" parent="tethers" instance=ExtResource("6_d6jip")]
+[node name="tether" parent="tethers" instance=ExtResource("6_g77m3")]
 transform = Transform3D(0.918559, 0.262259, -0.295753, -0.306186, 0.945272, -0.11274, 0.25, 0.194114, 0.948588, -1, -2, -28)
 
 [node name="triggers" type="Node3D" parent="."]
 
-[node name="dialogue1" parent="triggers" instance=ExtResource("9_tq58f")]
+[node name="dialogue1" parent="triggers" instance=ExtResource("7_wqtt1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.970093, 1, -1)
 
 [node name="kill_zone" type="Area3D" parent="."]

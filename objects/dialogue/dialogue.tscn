@@ -17,6 +17,7 @@ frame_1/texture = ExtResource("4_clc2b")
 frame_1/duration = 0.5
 
 [node name="dialogue" type="MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(1000, 0)
 anchors_preset = 7
 anchor_left = 0.5

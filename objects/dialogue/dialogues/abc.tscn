@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjvaineg72xx6"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_yo7tt"]
+[ext_resource type="Texture2D" uid="uid://bky67o2o1e0pd" path="res://sprites/zeta.jpg" id="2_v411v"]
+
+[node name="dialogue" instance=ExtResource("1_yo7tt")]
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_v411v")
+
+[node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
+text = "w-what about you, ome?"

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ojm4sed700kg"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_dubav"]
+[ext_resource type="Texture2D" uid="uid://dnm15d6xb6erk" path="res://sprites/ome.png" id="2_x6avm"]
+[ext_resource type="AudioStream" uid="uid://brkqnx6ys6b8" path="res://sounds/ome_text.mp3" id="3_yu24u"]
+
+[node name="dialogue" instance=ExtResource("1_dubav")]
+callback = true
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_x6avm")
+
+[node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
+text = "i'm..."
+
+[node name="AudioStreamPlayer2D" parent="." index="1"]
+stream = ExtResource("3_yu24u")

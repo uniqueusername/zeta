@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4lnstof8ivhk"]
+
+[ext_resource type="PackedScene" uid="uid://bt7udrhwx5aqv" path="res://objects/dialogue/dialogue.tscn" id="1_78x8c"]
+[ext_resource type="Texture2D" uid="uid://dnm15d6xb6erk" path="res://sprites/ome.png" id="2_n2u8r"]
+[ext_resource type="AudioStream" uid="uid://brkqnx6ys6b8" path="res://sounds/ome_text.mp3" id="3_h7wd7"]
+
+[node name="dialogue" instance=ExtResource("1_78x8c")]
+
+[node name="TextureRect" parent="MarginContainer/HBoxContainer" index="0"]
+texture = ExtResource("2_n2u8r")
+
+[node name="Label" parent="MarginContainer/HBoxContainer/ColorRect/MarginContainer/ColorRect/MarginContainer/ColorRect/MarginContainer" index="0"]
+text = "...sorry, zeta."
+
+[node name="AudioStreamPlayer2D" parent="." index="1"]
+stream = ExtResource("3_h7wd7")
